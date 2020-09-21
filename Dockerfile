@@ -7,7 +7,7 @@ RUN mkdir /work
 EXPOSE 8061
 
 # Copying the application's jar file inside the container
-COPY target/reference-consumer-1.0-SNAPSHOT.jar /work/consumer.jar
+COPY /tmp/target/reference-consumer-1.0-SNAPSHOT.jar /work/consumer.jar
 
 # Run the jar file 
 CMD java -jar /work/consumer.jar
