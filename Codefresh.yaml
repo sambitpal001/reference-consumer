@@ -35,5 +35,5 @@ steps:
     image: 'maven:3.5.2-jdk-8-alpine' # The image in which command will be executed
     working_directory: "${{clone}}" # Running command where code cloned
     commands:
-      - mvn clean install pact:publish -Dpact.broker.url=http://localhost:8500
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository test
     stage: "test"
