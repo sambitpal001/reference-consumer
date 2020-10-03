@@ -28,6 +28,7 @@ steps:
   #  tag: "latest"
   #  dockerfile: "Dockerfile"
   #  stage: "build"
+  #I have commented above these
 
   test:
     title: "Running test"
