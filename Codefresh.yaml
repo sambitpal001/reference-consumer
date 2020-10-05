@@ -18,17 +18,16 @@ steps:
     revision: "master"
     stage: "clone"
 
-  #build:
-  #  title: "Building Docker image"
-  #  type: "build"
-  #  image_name: "reference-consumer-1.0-SNAPSHOT"
-  #  working_directory: "${{clone}}"
+    #build:
+    #  title: "Building Docker image"
+    #  type: "build"
+    #  image_name: "reference-consumer-1.0-SNAPSHOT"
+    #  working_directory: "${{clone}}"
     # Set 'latest' tag on the image. Or, use built-in variables
     # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
   #  tag: "latest"
   #  dockerfile: "Dockerfile"
   #  stage: "build"
-  #I have commented above these
 
   test:
     title: "Running test"
@@ -36,5 +35,5 @@ steps:
     image: 'maven:3.5.2-jdk-8-alpine' # The image in which command will be executed
     working_directory: "${{clone}}" # Running command where code cloned
     commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository test
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository clean install pact:publish -Dpact.broker.url=http://ec2-15-207-223-119.ap-south-1.compute.amazonaws.com:8500/
     stage: "test"
