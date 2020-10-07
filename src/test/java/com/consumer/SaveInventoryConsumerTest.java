@@ -43,7 +43,7 @@ public class SaveInventoryConsumerTest{
         PactDslJsonBody bodyResponse = new PactDslJsonBody()
                 .stringValue("productName", "TV")
                  .stringType("locationName", "CHENNAI")               
-                .integerType("quantity", 100);
+                .integerType("quantity", 101);
 
         return builder
         		.given("create inventory").uponReceiving("a request to save inventory")
@@ -60,7 +60,7 @@ public class SaveInventoryConsumerTest{
 	@PactVerification
 	public void testCreateInventoryConsumer() throws IOException {
 		
-		Inventory inventory=new Inventory("TV", "CHENNAI", 100);
+		Inventory inventory=new Inventory("TV", "CHENNAI", 101);
     	HttpHeaders headers=new HttpHeaders();
     	headers.setContentType(MediaType.APPLICATION_JSON);
     	HttpEntity<Object> request=new HttpEntity<Object>(inventory, headers);
@@ -68,7 +68,7 @@ public class SaveInventoryConsumerTest{
     	ResponseEntity<String> responseEntity=restTemplate.postForEntity(mockProvider.getUrl()+"/api/inventory", request, String.class);
     	assertEquals("TV", JsonPath.read(responseEntity.getBody(),"$.productName"));
     	assertEquals("CHENNAI", JsonPath.read(responseEntity.getBody(),"$.locationName"));
-    	assertEquals((Integer)100, (Integer)JsonPath.read(responseEntity.getBody(),"$.quantity"));
+    	assertEquals((Integer)101, (Integer)JsonPath.read(responseEntity.getBody(),"$.quantity"));
 	}
 
 }
